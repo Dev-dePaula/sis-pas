@@ -5,171 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roda da Vida - PAS</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <style>
-        /* ESTILOS GERAIS (CSS) */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        header {
-            text-align: center;
-            border-bottom: 2px solid #4CAF50;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-        }
-
-        header h1 {
-            margin: 0;
-            color: #2E7D32;
-        }
-
-        header p {
-            color: #666;
-            font-style: italic;
-        }
-
-        .info-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            background: #e8f5e9;
-            padding: 15px;
-            border-radius: 5px;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-
-        /* Controles Deslizantes */
-        .controls {
-            background: #fff;
-        }
-
-        .control-group {
-            margin-bottom: 20px;
-        }
-
-        .control-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .control-group input[type="range"] {
-            width: 100%;
-            cursor: pointer;
-        }
-
-        .score-display {
-            color: #2E7D32;
-            font-weight: bold;
-        }
-
-        /* Área do Gráfico */
-        .chart-container {
-            position: relative;
-            width: 100%;
-        }
-
-        /* Área de Perguntas */
-        .reflection-section {
-            margin-top: 40px;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
-        }
-
-        .question-box {
-            margin-bottom: 15px;
-        }
-
-        .question-box label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .question-box textarea {
-            width: 100%;
-            height: 80px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-family: inherit;
-        }
-
-        /* Botão de Imprimir */
-        .btn-print {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background-color: #2E7D32;
-            color: white;
-            border: none;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 20px;
-            transition: background 0.3s;
-        }
-
-        .btn-print:hover {
-            background-color: #1b5e20;
-        }
-
-        /* CONFIGURAÇÃO DE IMPRESSÃO */
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-            .container {
-                box-shadow: none;
-                max-width: 100%;
-                padding: 0;
-            }
-            .btn-print {
-                display: none; /* Esconde o botão na impressão */
-            }
-            .content-grid {
-                display: block; /* Coloca o gráfico abaixo das notas na impressão para caber melhor */
-                page-break-inside: avoid;
-            }
-            .chart-container {
-                max-height: 400px; /* Limita tamanho na impressão */
-                margin: 0 auto;
-            }
-            textarea {
-                border: 1px solid #000;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -180,15 +16,15 @@
     </header>
 
     <div class="info-header">
-        <div><strong>Acolhido:</strong> <input type="text" placeholder="Nome do acolhido" style="border:none; background:transparent; font-size:16px; width:200px;"></div>
-        <div><strong>Data:</strong> <script>document.write(new Date().toLocaleDateString());</script></div>
-        <div><strong>Responsável:</strong> <input type="text" placeholder="Nome do coordenador" style="border:none; background:transparent; font-size:16px;"></div>
+        <div><strong>Acolhido:</strong> <input type="text" placeholder="Nome do acolhido" class="input-line"></div>
+        <div><strong>Data:</strong> <span id="dataAtual"></span></div>
+        <div><strong>Responsável:</strong> <input type="text" placeholder="Nome do coordenador" class="input-line"></div>
     </div>
 
     <div class="content-grid">
         <div class="controls">
             <h3>Avaliação das Áreas (1 a 10)</h3>
-            <p style="font-size: 0.9em; color: #666;">Arraste para definir a nota atual.</p>
+            <p class="subtitle">Arraste para definir a nota atual.</p>
 
             <div class="control-group">
                 <label>Espiritualidade <span id="val0" class="score-display">5</span></label>
@@ -239,9 +75,11 @@
             <textarea placeholder="Ex: Ler 1 capítulo do livro, Ligar para minha mãe, Fazer caminhada..."></textarea>
         </div>
 
-        <div class="question-box" style="margin-top: 30px; border-top: 1px dashed #999; padding-top: 20px;">
-            <div style="display: flex; justify-content: space-between;">
+        <div class="signature-box">
+            <div class="sig-line">
                 <span>__________________________<br>Assinatura do Acolhido</span>
+            </div>
+            <div class="sig-line">
                 <span>__________________________<br>Coordenação</span>
             </div>
         </div>
@@ -250,73 +88,7 @@
     <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR / SALVAR PDF</button>
 </div>
 
-<script>
-    // LÓGICA DO GRÁFICO (JAVASCRIPT)
-    const ctx = document.getElementById('rodaVidaChart').getContext('2d');
-    
-    // Dados iniciais
-    let dataValues = [5, 5, 5, 5, 5, 5];
-    const labels = ['Espiritualidade', 'Saúde Física', 'Família', 'Trabalho/Estudo', 'Emoções', 'Lazer'];
-
-    // Configuração do Gráfico (Polar Area Chart - fica parecendo fatias de pizza)
-    const myChart = new Chart(ctx, {
-        type: 'polarArea', 
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Nível de Satisfação',
-                data: dataValues,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.6)', // Espiritualidade (Vermelho suave)
-                    'rgba(54, 162, 235, 0.6)', // Saúde (Azul)
-                    'rgba(255, 206, 86, 0.6)', // Família (Amarelo)
-                    'rgba(75, 192, 192, 0.6)', // Trabalho (Verde)
-                    'rgba(153, 102, 255, 0.6)', // Emoções (Roxo)
-                    'rgba(255, 159, 64, 0.6)'  // Lazer (Laranja)
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                r: {
-                    min: 0,
-                    max: 10,
-                    ticks: {
-                        stepSize: 2,
-                        backdropColor: 'transparent' // Remove fundo dos números
-                    },
-                    grid: {
-                        color: '#ccc'
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                }
-            }
-        }
-    });
-
-    // Função para atualizar o gráfico quando mover a barra
-    function updateChart(index, value) {
-        // Atualiza o número ao lado da barra
-        document.getElementById('val' + index).innerText = value;
-        
-        // Atualiza o gráfico
-        myChart.data.datasets[0].data[index] = value;
-        myChart.update();
-    }
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
