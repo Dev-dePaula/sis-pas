@@ -1,0 +1,183 @@
+/* ESTILOS GERAIS */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+header {
+    text-align: center;
+    border-bottom: 2px solid #4CAF50;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    color: #2E7D32;
+}
+
+header p {
+    color: #666;
+    font-style: italic;
+}
+
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background: #e8f5e9;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.input-line {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    border-bottom: 1px dotted #333;
+    width: 200px;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Controles Deslizantes */
+.controls {
+    background: #fff;
+}
+
+.subtitle {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.control-group {
+    margin-bottom: 20px;
+}
+
+.control-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+
+.score-display {
+    color: #2E7D32;
+    font-weight: bold;
+}
+
+/* Área do Gráfico */
+.chart-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Área de Perguntas */
+.reflection-section {
+    margin-top: 40px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.question-box {
+    margin-bottom: 15px;
+}
+
+.question-box label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.question-box textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.signature-box {
+    margin-top: 30px;
+    border-top: 1px dashed #999;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Botão de Imprimir */
+.btn-print {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #2E7D32;
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+.btn-print:hover {
+    background-color: #1b5e20;
+}
+
+/* CONFIGURAÇÃO DE IMPRESSÃO */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+    .container {
+        box-shadow: none;
+        max-width: 100%;
+        padding: 0;
+    }
+    .btn-print {
+        display: none;
+    }
+    .content-grid {
+        display: block;
+        page-break-inside: avoid;
+    }
+    .chart-container {
+        max-height: 400px;
+        margin: 0 auto;
+    }
+    textarea {
+        border: 1px solid #000;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
